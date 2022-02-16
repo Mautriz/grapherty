@@ -1,13 +1,13 @@
 from grapherty.definitions import Datum, DatumClassList
-from grapherty.definitions import Resolvers
+from grapherty.definitions.graph_context import GraphContext
 from . import PropertyOne
 
 
 class PropertyTwo(Datum):
     @classmethod
-    async def calculate(cls, resolvers: Resolvers):
-        return await resolvers.get_key_result(PropertyOne) + " assurdo in incredibile"
+    async def do_calculate(cls, ctx: GraphContext, dependencies: dict):
+        return dependencies[PropertyOne] + " assurdo in incredibile"
 
     @classmethod
-    async def dependencies(cls) -> DatumClassList:
+    async def dependencies(cls, ctx) -> DatumClassList:
         return [PropertyOne]

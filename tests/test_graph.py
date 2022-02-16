@@ -13,9 +13,27 @@ def test_version():
 
 @pytest.mark.asyncio
 async def test_properties():
-    assert (
-        await Graph.resolve_depedency_tree(
-            [PropertyThree, PropertyTwo, PropertyOne], {"name": None}
-        )
-        == False
-    )
+    assert await Graph.resolve_depedency_tree(
+        [
+            PropertyThree,
+            PropertyTwo,
+            PropertyTwo,
+            PropertyTwo,
+            PropertyThree,
+            PropertyThree,
+            PropertyThree,
+            PropertyThree,
+            PropertyThree,
+            PropertyThree,
+            PropertyThree,
+            PropertyTwo,
+            PropertyTwo,
+            PropertyTwo,
+            PropertyOne,
+        ],
+        {"name": "CIAOOO!!!!"},
+    ) == {
+        PropertyThree: "ao",
+        PropertyTwo: "ciao sono mauro assurdo in incredibile",
+        PropertyOne: "ciao sono mauro",
+    }
